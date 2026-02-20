@@ -9,9 +9,11 @@ Il y a donc un seul controleur (un pupitre lumière ou un logiciel) et un nombre
 DMX c'est donc un protocole de communication, mais aussi une norme de câble : un câble supporte donc 512 canaux. On utilise en général des câbles XLR 5 ou 3 branches.
 
 !['cable XLR'](./images/XLR_5b.png)
+
 *Un câble XLR 5 branches...*
 
 !['table DMX'](./images/cableDMX.png)
+
 *512 canaux avec des valeurs de 0 à 255...*
 
 # 2. Channels
@@ -32,6 +34,7 @@ Chaque projecteur est fournit avec une documentation qui nous permet de savoir c
 Dans la Control Table, il y a la fonction de chaque channel, et la manière dont la valeur envoyée sur le channel contrôle le paramètre.
 
 !['table DMX'](./images/tableDMX.png)
+
 *Page de documentation de nos lyres Movo Beam...*
 
 Ici par exemple, le channel 1 et la valeur reçue de 0 à 255 opère le dimmer entre 0% et 100%.
@@ -49,6 +52,7 @@ Chaque projecteur reçoit donc les 512 informations DMX et choisit quels canaux 
 L'adresse DMX du projecteur est configurée directement sur l'interface du projecteur sur les projecteurs récents.
 
 !['adresse DMX'](./images/DMXadresse.jpg)
+
 *Ici le mode est 14 caneaux et l'adresse est 001...*
 
 Sur les projecteurs plus anciens, il y a des "dip switchs", qui permettent d'entrer l'adresse de manière physique, en binaire : le switch en haut est 0 et le switch en bas est 1. 
@@ -56,6 +60,7 @@ Sur les projecteurs plus anciens, il y a des "dip switchs", qui permettent d'ent
 Pour simplifier, on calcule l'adresse avec un tableau, ou on sait que la valeur de chaque switch est le double du précédent :
 
 !['adresse DMX'](./images/adressageDMXbit.png)
+
 *Exemple dipswitchs et tableau des valeurs en binaire...*
 
 Ici l'adresse du premier dipswitch est donc `1 + 2 + 4 + 8 + 32 + 64 = 111` (111101100 en binaire) et l'adresse du second dipswitch est `16 + 64 = 80` (000010100 en binaire).
@@ -80,12 +85,14 @@ Par exemple, on branche deux projecteurs RGB utilisant 3 canaux chacun (R, G et 
 On peux ensuite brancher d'autres projecteurs en série en continuant l'adressage selon le nombre de canaux utilisés par chaque projecteur, ou on peux aussi sauter des canaux, pour commencer les adresses sur des dizaines à chaque fois par exemple.
 
 !['reseau DMX'](./images/reseauDMX.png)
+
 *Un réseau DMX simple...*
 
 
 # 4. Pixel Mapping
 
 !['pixel mapping'](./images/leds.gif)
+
 *Pixel mapping sur nos barres leds...*
 
 Le principe du pixel mapping, c'est d'appliquer les couleurs d'un pixel d'un image aux couleurs d'un projecteur ou d'une led sur une barre de led.
@@ -95,6 +102,7 @@ On utilise en général plusieurs barres ou rubans de leds, et on utilise donc u
 C'est un peu comme si on avait un écran très basse définition, les leds étant beaucoup + grosses que des pixels.
 
 !['pixel mapping'](./images/pixelmapping.png)
+
 *Pixel mapper une photo de poisson...*
 
 En général, il y a beaucoup de leds par barre, et 3 (RGB) ou 4 (RGBW) canaux par leds. 
@@ -104,6 +112,7 @@ Pour rester dans un univers DMX (512 canaux), on est donc limité à 170 leds RG
 Si on dépasse un univers DMX, il faut utiliser des protocoles comme Artnet ou Sacn qui permettent d'envoyer plusieurs univers DMX grâce à des câbles réseaux. 
 
 !['pixelmapping 2'](./images/pixelmapping2.png)
+
 *Nombres de canaux pour notre image de poisson...*
 
 Le principe de la lumière (et des écrans aussi) c'est la synthèse additive, contrairement à l'imprimerie qui marche avec la synthèse soustractive. On arrive donc au noir en éteignant le R G et B, et au blanc en allumant le R G B.
@@ -111,9 +120,8 @@ Le principe de la lumière (et des écrans aussi) c'est la synthèse additive, c
 Certains projecteurs ont aussi du blanc (W), parce que le blanc créé par les leds RGB n'est pas aussi beau que la led blanche, et ça permet d'avoir des couleurs pastels plus belles.
 
 ![synthese des couleurs'](./images/synthese_couleurs.png)
+
 *La synthèse soustractive et additive...*
-
-
 
 Pour aller plus loin : [le process avec Madmapper](https://github.com/LucieMrc/Madmapper_PixelMapping).
 
@@ -122,11 +130,13 @@ Pour aller plus loin : [le process avec Madmapper](https://github.com/LucieMrc/M
 Pour contrôler les projecteurs, il faut donc envoyer des données : soit à partir d'une console lumière, soit en usb avec un ordinateur.
 
 !['pupitre'](./images/pupitre.png)
+
 *Une console lumière random...*
 
 Il y a pleins de types de consoles lumières, et parfois des logiciels qui vont avec. On en a pas à l'ateliernum.
 
 !['pupitre'](./images/dmxusb.png)
+
 *Un boîtier usb <-> DMX...*
 
 Avec un boîtier USB, on peux recevoir et envoyer des données DMX sur un ordinateur, avec le logiciel de notre choix.
@@ -162,6 +172,7 @@ On peux envoyer du DMX avec Arduino, sans boîtier usb DMX et sans passer par un
 On utilise un connecteur DMX qu'on relie à Arduino, qu'on peux piloter avec des boutons, des sliders, et tous les capteurs que l'on peux utiliser avec Arduino.
 
 !['dmx arduino'](./images/dmxarduino.png)
+
 *Un connecteur DMX que l'on peux connecter à Ardunio...*
 
 On peux par exemple contrôler le pan et le tilt avec un joystick, le dimmer avec un capteur de luminosité, ainsi de suite.
@@ -183,6 +194,7 @@ Sans passer par du DMX Arduino directement, on peux créer un controleur qui com
 On peux également créer des interfaces en utilisant un capteur capacitif, et remplacer les boutons par des élements en matériaux conducteurs : laine, broderie, cuivre, impression 3D, etc...
 
 !['controleur capa'](./images/controleurcapa.gif)
+
 *Mon controleur en laine feutrée relié à Touchdesigner...*
 
 ## 6.3 Mediapipe
@@ -196,6 +208,7 @@ Mon [tuto pour utiliser Mediapipe dans Touchdesigner](https://github.com/LucieMr
 On peux ainsi utiliser la position de tous ces points pour calculer des distances, détecter des gestes, et utiliser les données pour contrôler des paramètres DMX et créer des interactions en temps réel sans interface.
 
 !['pixel mapping'](./images/dmxTD.gif)
+
 *Lyre controlé avec des gestes de la main...*
 
 
